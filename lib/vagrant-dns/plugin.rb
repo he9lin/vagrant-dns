@@ -13,28 +13,32 @@ end
 module VagrantPlugins
   module DNS
     class Plugin < ::Vagrant.plugin("2")
+      name "DNS"
+
       class << self
         def provision(hook)
           hook.before ::Vagrant::Action::Builtin::ConfigValidate, Action.setup
-          # hook.after  ::Vagrant::Action::Builtin::Provision,      Action.start
+          hook.after  ::Vagrant::Action::Builtin::Provision,      Action.start
         end
       end
 
-      name "rubydns-vagrant"
+      name "vagrant-dns"
 
       action_hook(:rubydns_provision, :machine_action_up,        &method(:provision))
       action_hook(:rubydns_provision, :machine_action_provision, &method(:provision))
-      # action_hook(:rubydns_cleanup,   :machine_action_destroy) do |hook|
-      #   # @todo this should be appended to the middleware stack instead of hooked
-      #   # in after the Virtualbox specific destroy step but there is a bug in
-      #   # Vagrant (1.1.0) which causes appended middleware to run multiple times.
-      #   hook.after(
-      #     VagrantPlugins::ProviderVirtualBox::Action::DestroyUnusedNetworkInterfaces,
-      #     RubyDNS::Vagrant::Action.clean)
-      # end
-      config(:berkshelf) do
+      action_hook(:rubydns_cleanup,   :machine_action_halt) do |hook|
+        hook.after(::Vagrant::Action::Builtin::GracefulHalt,
+          VagrantPlugins::DNS::Action.clean)
+      end
+
+      config(:dns) do
         require_relative "config"
         Config
+      end
+
+      command(:dns) do
+        require_relative "command"
+        Command
       end
     end
   end

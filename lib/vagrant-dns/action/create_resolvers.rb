@@ -1,22 +1,17 @@
 module VagrantPlugins
   module DNS
     module Action
-      # Create resolver files.
-      class SetResolvers
+      # Create resolver files in ~/.vagrant.d/tmp/dns/resolver
+      class CreateResolvers
         def initialize(app, env)
           @app = app
         end
 
         def call(env)
-          # ~/.vagrant.d/tmp/dns/resolver
-          tmp_dns_path    = File.join(env[:tmp_path], "dns")
+          tmp_dns_path    = env[:dns].tmp_path
           resolver_folder = File.join(tmp_dns_path, "resolver")
 
-          # VagrantDNS::Config.listen.first.last
-          # [[:udp, "127.0.0.1", 5300]]
-          port = 5300
-
-          # Config
+          port = VagrantPlugins::DNS.listen.first.last # 5300
           tlds = env[:machine].config.dns.tlds
 
           FileUtils.mkdir_p(resolver_folder)
@@ -27,7 +22,7 @@ module VagrantPlugins
             end
           end
 
-          env[:ui].info "Created resolvers"
+          env[:dns].ui.info "Created resolvers for tlds #{tlds}"
 
           @app.call(env)
         end
