@@ -14,7 +14,6 @@ Gem::Specification.new do |spec|
   spec.license       = "MIT"
 
   spec.required_rubygems_version = ">= 1.3.6"
-  spec.rubyforge_project         = "vagrant-dns"
 
   spec.add_runtime_dependency "rubydns", "~> 0.6.1"
   spec.add_runtime_dependency "daemons", "~> 1.1.9"
