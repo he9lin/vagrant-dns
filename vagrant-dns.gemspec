@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["he9lin@gmail.com"]
   spec.description   = %q{A RubyDns plugin for Vagrant 1.1.x}
   spec.summary       = %q{A RubyDns plugin for Vagrant 1.1.x}
-  spec.homepage      = "http://heyook.com"
+  spec.homepage      = "https://github.com/he9lin/vagrant-dns"
   spec.license       = "MIT"
 
   spec.required_rubygems_version = ">= 1.3.6"
