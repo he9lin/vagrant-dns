@@ -20,7 +20,7 @@ module VagrantPlugins
       attr_accessor :dns_server
 
       def initialize
-        @ui = ::Vagrant::UI::Colored.new.scope("dns")
+        @ui = ::Vagrant::UI::Colored.new("dns")
       end
 
       def tmp_path
