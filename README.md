@@ -31,6 +31,7 @@ It is only used as a plugin for Vagrant, so to install:
       # to be 'dev', we would get DNS pattern /^.*machine.dev$/
       config.vm.hostname = "machine"
 
+      # Optional configuration
       config.dns.patterns = [/^.*mysite.dev$/, /^.*myothersite.dev$/]
 
       config.vm.network :private_network, ip: "33.33.33.100"
