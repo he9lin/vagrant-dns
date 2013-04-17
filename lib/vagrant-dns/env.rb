@@ -20,7 +20,12 @@ module VagrantPlugins
       attr_accessor :dns_server
 
       def initialize
-        @ui = ::Vagrant::UI::Colored.new("dns")
+        # Make it compatible with both 1.1.5 and 1.2.x
+        @ui = begin
+                ::Vagrant::UI::Colored.new("dns")
+              rescue ArgumentError
+                ::Vagrant::UI::Colored.new.scope("dns")
+              end
       end
 
       def tmp_path
