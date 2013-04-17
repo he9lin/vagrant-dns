@@ -7,8 +7,9 @@ lib.
 
 ## TODOs
 
-* Add specs
+* Should default this plugin disabled, and enable by `config.dns.enable = true`
 * Add config validation
+* Add specs
 * Add DNS resolver uninstall command
 * Add Vagrant destroy action hook to clean dns tmp path
 
