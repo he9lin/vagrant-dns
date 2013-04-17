@@ -13,8 +13,6 @@ end
 module VagrantPlugins
   module DNS
     class Plugin < ::Vagrant.plugin("2")
-      name "DNS"
-
       class << self
         def provision(hook)
           hook.before ::Vagrant::Action::Builtin::ConfigValidate, Action.setup
