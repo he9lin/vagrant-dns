@@ -5,9 +5,13 @@ heavily based on https://github.com/BerlinVagrant/vagrant-dns (which doesn't
 seem to support Vagrant 1.1.x currently), so credit goes to the author of that
 lib.
 
+Currently, it doesn't support running multiple vagrant machines. All vagrant-dns
+related files are located in `~/.vagrant.d/tmp/dns`. This may be something
+that needs to be addressed later on.
+
 ## TODOs
 
-* Should default this plugin disabled, and enable by `config.dns.enable = true`
+* Default this plugin disabled, and enable by `config.dns.enable = true`
 * Add config validation
 * Add specs
 * Add DNS resolver uninstall command
@@ -38,7 +42,7 @@ It is only used as a plugin for Vagrant, so to install:
       config.vm.network :private_network, ip: "33.33.33.100"
     end
 
-After `vagrant up`, install DNS resolver on mac:
+**After** `vagrant up`, install DNS resolver on mac:
 
     $ sudo vagrant dns --install
 
