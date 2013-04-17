@@ -7,6 +7,10 @@ module VagrantPlugins
         end
 
         def call(env)
+          unless env[:machine].config.dns.enabled
+            return @app.call(env)
+          end
+
           env[:dns].tmp_path    = File.join(env[:tmp_path], DNS.namespace)
           env[:dns].daemon_path = File.join(env[:dns].tmp_path, "daemon")
           env[:dns].config_file = File.join(env[:dns].tmp_path, "config")
