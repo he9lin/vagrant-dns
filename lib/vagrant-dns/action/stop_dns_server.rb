@@ -9,6 +9,10 @@ module VagrantPlugins
         end
 
         def call(env)
+          unless env[:machine].config.dns.enabled
+            return @app.call(env)
+          end
+
           env[:dns].ui.info "Stopping dns server..."
           env[:dns].dns_server.stop!
 

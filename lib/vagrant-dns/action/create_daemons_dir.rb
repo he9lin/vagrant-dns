@@ -7,6 +7,10 @@ module VagrantPlugins
         end
 
         def call(env)
+          unless env[:machine].config.dns.enabled
+            return @app.call(env)
+          end
+
           daemon_path = env[:dns].daemon_path
 
           if File.directory?(daemon_path)

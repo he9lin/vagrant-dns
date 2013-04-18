@@ -8,6 +8,10 @@ module VagrantPlugins
         end
 
         def call(env)
+          unless env[:machine].config.dns.enabled
+            return @app.call(env)
+          end
+
           tmp_dns_path    = env[:dns].tmp_path
           resolver_folder = File.join(tmp_dns_path, "resolver")
 

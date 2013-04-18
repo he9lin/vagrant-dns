@@ -8,6 +8,10 @@ module VagrantPlugins
         end
 
         def call(env)
+          unless env[:machine].config.dns.enabled
+            return @app.call(env)
+          end
+
           config_file = env[:dns].config_file
           registry    = File.exists?(config_file) ? \
                           YAML.load(File.read(config_file)) : {}
