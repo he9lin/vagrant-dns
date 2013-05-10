@@ -11,11 +11,12 @@ that needs to be addressed later on.
 
 ## TODOs
 
-* Default this plugin disabled, and enable by `config.dns.enable = true`
+* <del>Default this plugin disabled, and enable by `config.dns.enable = true`</del>
 * Add config validation
 * Add specs
 * Add DNS resolver uninstall command
 * Add Vagrant destroy action hook to clean dns tmp path
+* Move resolvers create and installation to command
 
 ## Installation
 
